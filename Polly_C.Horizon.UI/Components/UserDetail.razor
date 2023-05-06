@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Hosting
+@using Polly_C.Horizon.UI.AppState;
+@inject DialogService dialogService
+@inject IWebHostEnvironment HostEnvironment
+@inject NavigationManager NavigationManager
+@inject SelectedPolicyState SelectedPolicyState;
+
+<style>
+    .hlp_link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="col-12 row panel">
+    <div class="col-7">
+        @if (SelectedPolicyState is not null && !string.IsNullOrEmpty(SelectedPolicyState.PolicyNumber))
+        {
+            <div class="col-12 row">
+                <div class="col-3">Client Name:</div>
+                <div class="col-9">@(SelectedPolicyState.ClientFullName)
+
+                </div>
+            </div>
+            <div class="col-12 row">
+                <div class="col-3">Policy Number:</div>
+                <div class="col-9">@SelectedPolicyState.PolicyNumber</div>
+        </div>
+        }
+    </div>
+    <div class="col-1">
+        <div class="col-12">
+           <span>
+                <RadzenImage Path="/Images/Polly-C_Logo.png" Click=@ShowSimpleDialog class="help"/>
+           </span>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="row">
+            <div class="col-10">
+                <div class="col-12 row">
+                    <div class="col-4 user-info">Environment:</div>
+                    <div class="col-5 user-data">@HostEnvironment.EnvironmentName</div>
+                    <div class="col-3 logout hlp_link">Logout</div>
+                </div>
+                <div class="col-12 row">
+                    <div class="col-4 user-info">Logged In:</div>
+                    <div class="col-5 user-data">@(userInfo.Username == null ? "" : userInfo.Username.Replace(@"\\", @"\"))</div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="col-12 row">
+                    <button class="btn btn-light btn-sm">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    [CascadingParameter]
+    UserDetails userInfo { get; set; } = new UserDetails();
+
+    public async Task ShowSimpleDialog()
+    {
+        await dialogService.OpenAsync<HelpPopup>("General Query",
+        new Dictionary<string, object>() {},
+        new DialogOptions(){Width="700px",Height="512px",Resizable=true,Draggable=true});
+    }
+
+    protected override void OnInitialized()
+    {
+        SelectedPolicyState.OnChange += StateHasChanged;
+    }
+}
+

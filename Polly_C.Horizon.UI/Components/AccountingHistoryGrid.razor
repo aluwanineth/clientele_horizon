@@ -1,0 +1,33 @@
+﻿@inject WebApiWrapperInterfaces.ClientServicing.IClientServicingWebApiWrapper ClientServicingWebApi
+@attribute [Authorize]
+
+<RadzenDataGrid class="grid-format accounting-history-grid-format" AllowFiltering="true" AllowColumnResize="true"
+                FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true"
+                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" TItem="string" ColumnWidth="300px"
+                LogicalFilterOperator="LogicalFilterOperator.Or" EditMode="DataGridEditMode.Single">
+    <EmptyTemplate>
+        <p class="empty-text">@emptyText</p>
+    </EmptyTemplate>
+    <Columns>
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Reference No." Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Effective Date" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Post Date" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Month" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Status" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Tracking" Width="80px" TextAlign="TextAlign.Left" FormatString="{0:yyyy/MM/dd}" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Premium Amount" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="IFA Business Fee" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Amount Billed" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Amount Paid" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="string" Property="" Filterable="false" Title="Amount Outstanding" Width="80px" TextAlign="TextAlign.Left" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    [CascadingParameter]
+    public string EntityNo { get; set; }
+    [CascadingParameter]
+    public int? LegPolicyNo { get; set; }
+
+    string emptyText = "No Items to display!";
+}

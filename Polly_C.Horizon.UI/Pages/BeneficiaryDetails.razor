@@ -1,0 +1,46 @@
+﻿@page "/BeneficiaryDetails"
+@using Polly_C.Horizon.Models.DTOs.ClientServicing;
+@using Polly_C.Horizon.Models.DTOs.ClientServicing.Results;
+@using Polly_C.Horizon.UI.Pages
+@inject NavigationManager NavigationManager
+@inject WebApiWrapperInterfaces.ClientServicing.IClientServicingWebApiWrapper ClientServicingWebApiWrapper
+@attribute [Authorize]
+
+<div class="border-info">
+    <InformationBoard OnStateHasChanged="OnStateHasChanged" />
+</div>
+
+<div class="row col-12">
+    <PolicyActionCreateQuote/>
+</div>
+
+<div class="row col-12">
+    <ClientDetails/>
+</div>
+<div class="row col-12" style="height:9.2%">
+    <PolicyGrid/>
+</div>
+<div class="row col-12">
+    <BeneficiaryDetailsGrid />
+</div>
+
+@code {
+
+    [CascadingParameter]
+    public CustomerDetail customerDetail { get; set; }
+
+    private List<BenefitExtendedMemberResult> PolicyMemberBenefits { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (customerDetail is null)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private void OnStateHasChanged()
+    {
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,44 @@
+﻿@using Polly_C.Horizon.Models.DTOs.ClientServicing.Results;
+@inject WebApiWrapperInterfaces.ClientServicing.IClientServicingWebApiWrapper clientServicingWebApiWrapper
+@attribute [Authorize]
+
+<RadzenDataGrid class="grid-format policy-grid-format" @ref="CustomerPolicyGrid" Data="@CustomerPolicyData" AllowFiltering="true" AllowColumnResize="true"
+                FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true"
+                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" TItem="CustomerPolicyInfoResult" ColumnWidth="300px"
+                LogicalFilterOperator="LogicalFilterOperator.Or" EditMode="DataGridEditMode.Single" RowClick="PolicySelected" @bind-Value=@SelectedPolicy>
+    <EmptyTemplate>
+        <p class="empty-text">@emptyText</p>
+    </EmptyTemplate>
+    <Columns>
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="LegacyPolicyNo" Filterable="false" Title="Policy Number" Width="70px" TextAlign="TextAlign.Right" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="IFANo" Filterable="false" Title="IFA/Broker/Agency Number" Width="100px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="SalesPerson" Filterable="false" Title="Sales Channel" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="ProductDescr" Filterable="false" Title="Product" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="PolicyStatus" Filterable="false" Title="Plan Type" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="StatusDate" Filterable="false" Title="Status" Width="70px" TextAlign="TextAlign.Left" FormatString="{0:yyyy/MM/dd}" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="PolicyPremium" Filterable="false" Title="Premium" Width="70px" TextAlign="TextAlign.Right" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="Payer" Filterable="false" Title="Business Fee" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="DebiCheckStatus" Filterable="false" Title="Debicheck Status" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="CustomerPolicyInfoResult" Property="DateOfCommencement" Filterable="false" Title="DOC" Width="70px" TextAlign="TextAlign.Right" FormatString="{0:yyyy/MM/dd}" />
+    </Columns>
+</RadzenDataGrid>
+@code {
+    [CascadingParameter]
+    public CustomerDetail customerDetail { get; set; }
+
+    string emptyText = "No Items to display!";
+
+    public RadzenDataGrid<CustomerPolicyInfoResult> CustomerPolicyGrid = new RadzenDataGrid<CustomerPolicyInfoResult>();
+    public List<CustomerPolicyInfoResult> CustomerPolicyData = new List<CustomerPolicyInfoResult>();
+    public IList<CustomerPolicyInfoResult> SelectedPolicy;
+
+    public void PolicySelected(DataGridRowMouseEventArgs<CustomerPolicyInfoResult> Arg)
+    {
+        
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+}

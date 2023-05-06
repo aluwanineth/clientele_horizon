@@ -1,0 +1,325 @@
+﻿@using Polly_C.Horizon.Models.DTOs.ClientServicing.Requests;
+@using Polly_C.Horizon.Models.DTOs.ClientServicing.Results;
+@using Polly_C.Horizon.UI.DTOs.ClientServicing;
+@using Polly_C.Horizon.UI.WebApiWrapperInterfaces;
+@using Polly_C.Horizon.UI.WebApiWrapperInterfaces.ClientServicing;
+@inject DialogService dialogService
+@inject IClientServicingWebApiWrapper ClientServicingApiWrapper
+@inject DialogService DialogService
+
+<RadzenRow>
+    <RadzenTemplateForm TItem="SearchModel" Data="@searchModel" class="search-form">
+        <div class="search-box-container" style="@("display:" + (showAdvancedSearch ? "none" : "flex") + ";");">
+            <div class="col search-box search-box-first-item">
+                <div class="search-label">
+                    Policy Number
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="policyno_search" @bind-Value=@searchModel.PolicyNo @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+
+            <div class="col search-box">
+                <div class="search-label">
+                    IFA Number
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="ifa_search" @bind-Value=@searchModel.IFANo @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+
+            <div class="col search-box">
+                <div class="search-label">
+                    ID &#47; Passport Number
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="idpassportno_search" @bind-Value=@searchModel.IDPassportNo @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+
+            <div class="col search-box">
+                <div class="search-label">
+                    Email Address
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="email_search" @bind-Value=@searchModel.EmailAddress @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+
+            <div class="col search-box">
+                <div class="search-label">
+                    Claim Number
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="claim_search" @bind-Value=@searchModel.ClaimNo @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+
+            <div class="col search-box">
+                <div class="search-label">
+                    Client Number
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="clientno_search" @bind-Value=@searchModel.ClientEntityNo @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+
+            <div class="col search-box script-box-last-item">
+                <div class="search-label">
+                    Cellphone Number
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="cellno_search" @bind-Value=@searchModel.CellphoneNo @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+        </div>
+
+        <div class="search-box-container" style="@("display:" + (showAdvancedSearch ? "flex" : "none") + ";")">
+            <div class="col search-box search-box-first-item">
+                <div class="search-label">
+                    Legacy Policy Number
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="legacypolno_search" @bind-Value=@searchModel.LegacyPolicyNo @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+            <div class="col search-box unabled">
+                <div class="search-label">
+                    Application Form Number
+                </div>
+                <RadzenTextBox Disabled Style="cursor:not-allowed;" class="search-txt" Name="applicationformno_search" @bind-Value=@searchModel.ApplicationFormNo />
+            </div>
+            <div class="col search-box unabled">
+                <div class="search-label">
+                    Business Name
+                </div>
+                <RadzenTextBox Disabled Style="cursor:not-allowed;" class="search-txt" Name="businessname_search" @bind-Value=@searchModel.BusinessName />
+            </div>
+            <div class="col search-box">
+                <div class="search-label">
+                    Name
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="personname_search" @bind-Value=@searchModel.PersonName @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+            <div class="col search-box script-box-last-item">
+                <div class="search-label">
+                    Surname
+                </div>
+                <RadzenTextBox Trim="true" class="search-txt" Name="personsurname_search" @bind-Value=@searchModel.PersonSurname @onkeyup="@SearchPolicyKeyDown" />
+            </div>
+        </div>
+
+        <div class="btn-info">
+            <RadzenSplitButton id="searchBtnTxt" Text=@searchText Size="ButtonSize.Small" Click="@(args => SearchPolicy(args))">
+                <ChildContent>
+                    <RadzenSplitButtonItem Text="Standard Search Criteria" Value="0" Style="@("cursor:pointer; padding:4px;" + (showAdvancedSearch ? "" : " display:none;"))" />
+                    <RadzenSplitButtonItem Text="Advanced Search Criteria" Value="1" Style="@("cursor:pointer; padding:4px;" + (showAdvancedSearch ? " display:none;" : ""))" />
+                </ChildContent>
+            </RadzenSplitButton>
+        </div>
+    </RadzenTemplateForm>
+</RadzenRow>
+<RadzenRow>
+    <RadzenColumn>
+        <RadzenRow>
+            <ClientPolicyInfo />
+        </RadzenRow>
+        <RadzenRow>
+        
+        <div class="row col-12">
+            <CascadingValue Value="@CustomerPolicyGrid">
+                <CascadingValue Value="@CustomerPolicyData">
+                    <CascadingValue Value="@SelectedPolicy">
+                        <PolicySearchGrid />
+                    </CascadingValue>
+                </CascadingValue>
+            </CascadingValue>
+
+            @if (isLoading)
+            {
+                <div class="col-12 row text-center">
+                    <LoadingSpinner />
+                </div>
+            }
+            </div>
+        </RadzenRow>
+    </RadzenColumn>
+    <RadzenColumn Size="2">
+        <MilestoneAndMessageBoard />
+    </RadzenColumn>
+</RadzenRow>
+
+@code {
+
+    public SearchModel searchModel = new();
+    private string searchText = "Search";
+    private bool showAdvancedSearch = false;
+    private bool isLoading = false;
+
+    public RadzenDataGrid<PersonSearchResult> CustomerPolicyGrid { get; set; } = new();
+    public List<PersonSearchResult> CustomerPolicyData { get; set; } = new();
+    public IList<PersonSearchResult> SelectedPolicy { get; set; } = new List<PersonSearchResult>();
+
+    bool value1;
+    bool value2;
+    bool value3;
+    bool value4;
+    bool value5;
+    bool value6;
+    bool value7;
+
+    public AuthenticationCombinationsModel authenticationCombinationsModel = new();
+
+    private async void SearchPolicy(RadzenSplitButtonItem item)
+    {
+        if (item != null)
+        {
+            ToggleShowAdvancedSearch((item.Value == "1" ? true : false));
+        }
+        else
+        {
+            if (!showAdvancedSearch)
+            {
+                PersonSearchRequest personSearchRequest = new PersonSearchRequest
+                    {
+                        CellNo = searchModel.CellphoneNo ?? "",
+                        ClientEntityNo = searchModel.ClientEntityNo ?? "",
+                        IFANo = searchModel.IFANo ?? "",
+                        LegalRefNo = searchModel.LegalRefNo ?? "",
+                        LegPolNo = searchModel.LegacyPolicyNo ?? "",
+                        PolicyNo = searchModel.PolicyNo ?? ""
+                    };
+                var result = await ClientServicingApiWrapper.PersonSearch(personSearchRequest);
+                CustomerPolicyData = result.Data;
+            }
+            else
+            {
+                AdvancedPersonSearchRequest advancedPersonSearchRequest = new AdvancedPersonSearchRequest
+                    {
+                        EncashmentNo = "",
+                        BusRegNo = "",
+                        AppFormNo = searchModel.ApplicationFormNo ?? "",
+                        EmailAddress = searchModel.EmailAddress ?? "",
+                        BusinessName = searchModel.BusinessName ?? "",
+                        FullName = searchModel.PersonName + " " + searchModel.PersonSurname
+                    };
+                var result = await ClientServicingApiWrapper.AdvancedPersonSearch(advancedPersonSearchRequest);
+                CustomerPolicyData = result.Data;
+            }
+
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+                    /*private async void ShowSearchValidationPopup(RadzenSplitButtonItem item)
+                {
+                if (item != null)
+                {
+                ToggleShowAdvancedSearch((item.Value == "1" ? true : false));
+                }
+            else
+            {
+        var results = await dialogService.OpenAsync("", ds => 
+    @<div class="rz-p-12 rz-text-align-center">
+            <RadzenCard>
+                <div class="row col-12">
+                <div class="col-5">
+                <div class="row col-12">
+                ID Number/Passport Number
+                </div>
+                    <div class="row col-12">
+                    Cell Number
+                </div>
+                <div class="row col-12">
+                    Last 4 digits of bank account Number
+                </div>
+                <div class="row col-12">
+                    Physical Address
+                </div>
+                <div class="row col-12">
+                    Debit Day
+                </div>
+                <div class="row col-12">
+                    Premium Amount
+                </div>
+                <div class="row col-12">
+                    Email Address
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="row col-12">
+                    <RadzenTextBox Trim="true" Name="ID_Number" @bind-Value=@authenticationCombinationsModel.id_number />
+                </div>
+                <div class="row col-12">
+                    <RadzenTextBox Trim="true" Name="cell_number" @bind-Value=@authenticationCombinationsModel.cell_number />
+                </div>
+                    <div class="row col-12">
+                    <RadzenTextBox Trim="true" Name="bank_account_number" @bind-Value=@authenticationCombinationsModel.bank_account_digits />
+                </div>
+                <div class="row col-12">
+                    <RadzenTextBox Trim="true" Name="physical_address" @bind-Value=@authenticationCombinationsModel.physical_address />
+                </div>
+                <div class="row col-12">
+                    <RadzenTextBox Trim="true" Name="debit_day" @bind-Value=@authenticationCombinationsModel.debit_day />
+                </div>
+                <div class="row col-12">
+                    <RadzenTextBox Trim="true" Name="premium_amount" @bind-Value=@authenticationCombinationsModel.premium_amount/>
+                </div>
+                    <div class="row col-12">
+                    <RadzenTextBox Trim="true" Name="email_address" @bind-Value=@authenticationCombinationsModel.email_address />
+                </div>
+            </div>
+            <div col-2>
+            <div class="row col-12">
+                    <RadzenCheckBox @bind-Value=@value1 Name="CheckBox1" />
+                </div>
+                <div class="row col-12">
+                    <RadzenCheckBox @bind-Value=@value2 Name="CheckBox2" />
+                </div>
+                <div class="row col-12">
+                    <RadzenCheckBox @bind-Value=@value3 Name="CheckBox3" />
+                </div>
+                    <div class="row col-12">
+                    <RadzenCheckBox @bind-Value=@value4 Name="CheckBox4" />
+                </div>
+                <div class="row col-12">
+                <RadzenCheckBox @bind-Value=@value5 Name="CheckBox5" />
+                </div>
+                <div class="row col-12">
+                    <RadzenCheckBox @bind-Value=@value6 Name="CheckBox6" />
+                </div>
+                <div class="row col-12">
+                    <RadzenCheckBox @bind-Value=@value7 Name="CheckBox7" />
+            </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12">
+                <RadzenButton Text="Ok" Click="() => ds.Close(true)" Style="margin-bottom: 10px; width: 150px" />
+                <RadzenButton Text="Cancel" Click="() => ds.Close(false)" ButtonStyle="ButtonStyle.Secondary" Style="margin-bottom: 10px; width: 150px" />
+                </div>
+                </div>
+                </RadzenCard>
+    </div>
+    );
+
+    var res = results;
+    if (results)
+        {
+    SearchPolicy();
+    }
+        else
+        {
+    SearchPolicy();
+        }
+
+    }
+    }*/
+    //async Task ShowSearchValidationPopup() => await dialogService.OpenAsync("Personal Details of Client", ds =>
+    //  @<AuthenticationCombinationsPopup />, new DialogOptions() { OkButtonText = "Proceed", CancelButtonText = "Cancel" });
+    public void ToggleShowAdvancedSearch(Boolean _new_value)
+    {
+        if (_new_value)
+        {
+            searchText = "AdvancedSearch";
+        }
+        else
+        {
+            searchText = "Search";
+        }
+        showAdvancedSearch = _new_value;
+        StateHasChanged();
+    }
+    private void SearchPolicyKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Code == "Enter" || e.Code == "NumpadEnter")
+        {
+            SearchPolicy(null);
+        }
+
+    }
+}

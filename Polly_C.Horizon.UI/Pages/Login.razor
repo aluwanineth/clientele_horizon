@@ -1,0 +1,83 @@
+﻿@page "/login"
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@inject WebApiWrapperInterfaces.IAuthenticationService AuthenticationService
+@using System.Text.Json
+
+<RadzenRow class="rz-text-align-center " Gap="3rem">
+    <RadzenColumn Size="6" Offset="3">
+        <RadzenTemplateForm TItem="AuthenticationRequest" Data=@AuthenticationRequest>
+            <div class = "image">
+                <img src="/Images/ClienteleOnlyLogo.jpg" />
+            </div>
+            <h1 class="h3 mb-3 fw-normal">LOGIN TO YOUR ACCOUNT</h1>    
+            <div class="form-floating mb-3">
+                <RadzenTextBox id="username" Name="Username" Placeholder="username@domain.co.za" @bind-Value=@AuthenticationRequest.Username class="component"></RadzenTextBox>
+                <span class="user-icon">
+                    <i class="oi oi-person"></i>
+                </span>
+                <div class="popup">
+                    <RadzenRequiredValidator Component="Username" Text="Username is required" Popup=@true class="popup-text" />
+                    <RadzenEmailValidator Component="Username" Text="Provide a valid email address" Popup=@true class="popup-text" />
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <RadzenPassword Name="Password" Placeholder="password" @bind-Value=@AuthenticationRequest.Password class="component"></RadzenPassword>
+                <span class="password-icon">
+                    <i class="oi oi-key"></i>
+                </span>
+                <div class="popup">
+                    <RadzenRequiredValidator Component="Password" Text="Password is required" Popup=@true class="popup-text" />
+                </div>
+            </div>
+            <div>
+                <RadzenButton Name="Login" Click="@(args => HandleLogin())" Text="Login" class="btn-login" />
+            </div>
+
+            @if (ShowErrors)
+            {
+                <div class="error-area">
+                    <p>@Error</p>
+                </div>
+            }
+        </RadzenTemplateForm>
+    </RadzenColumn>
+</RadzenRow>
+
+@code {
+    ElementReference username;
+    AuthenticationRequest AuthenticationRequest = new ();
+
+    [CascadingParameter]
+    UserDetails userInfo { get; set; } = new UserDetails();
+       
+    private bool ShowErrors;
+    private string Error = "";
+    //Focus on username onstart.
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        JSRuntime.InvokeVoidAsync("eval", $@"document.getElementById(""username"").focus()");
+    }
+
+    private async Task HandleLogin()
+    {
+        ShowErrors = false;
+
+        var result = await AuthenticationService.AuthenticateAsync(AuthenticationRequest);
+
+        if (result.Succeeded)
+        {
+            userInfo.Username = result.Data.Username;
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            Error = result.Message;
+            ShowErrors = true;
+        }
+    }
+
+}
+

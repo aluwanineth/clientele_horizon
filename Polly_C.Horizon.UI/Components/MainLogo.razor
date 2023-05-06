@@ -1,0 +1,12 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="container-fluid">
+    <img src="/Images/ClienteleHorizontal.jpg" @onclick="@(() => NavigationManager.NavigateTo("/"))" alt="Clientele" />
+</div>
+
+@code {
+    private void GoToHomePage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

@@ -1,0 +1,28 @@
+﻿@page "/"
+@using Polly_C.Horizon.Models;
+@using Polly_C.Horizon.Models.DTOs.ClientServicing.Requests;
+@using Polly_C.Horizon.Models.DTOs.ClientServicing.Results;
+@using Polly_C.Horizon.Models.DTOs.ClientServicing;
+@using Polly_C.Horizon.UI.WebApiWrapperInterfaces.ClientServicing;
+@attribute [Authorize]
+@inject NavigationManager NavigationManager
+@inject IClientServicingWebApiWrapper ClientServicingWebApiWrapper
+
+<RadzenRow>
+    <InformationBoard OnStateHasChanged="OnStateHasChanged" />
+</RadzenRow>
+<RadzenRow>
+    <SearchPanel />
+</RadzenRow>
+
+@code {
+    private void OnStateHasChanged()
+    {
+        try { StateHasChanged(); }
+        catch (Exception ex)
+        {
+            Log.Information($"Error: {ex.Message}, Inner Exeption: {ex.InnerException}, StackTrace: {ex.StackTrace}");
+        }
+
+    }
+}

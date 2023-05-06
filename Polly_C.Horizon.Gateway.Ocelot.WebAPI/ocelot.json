@@ -1,0 +1,23 @@
+{
+  "GlobalConfiguration": {
+    "GlobalConfiguration": {
+      "BaseUrl": "https://gatewayurl"
+    }
+  },
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/gateway/v1.0/policies",
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/v1.0/policies",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5282
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.Models", "Polly_C.Horizon.Models\Polly_C.Horizon.Models.csproj", "{87C968B8-0E74-45F9-86CA-B6CF74437897}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.Utilities", "Polly_C.Horizon.Utilities\Polly_C.Horizon.Utilities.csproj", "{FACD19FF-04F6-4B5E-9B38-C7127C28DF20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.WebAPI.Integration", "Polly_C.Horizon.WebAPI.Integration\Polly_C.Horizon.WebAPI.Integration.csproj", "{51717F8A-B3D3-4B29-AAD3-D00DC13ACAF4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.WebAPI.ClientServicing", "Polly_C.Horizon.WebAPI.ClientServicing\Polly_C.Horizon.WebAPI.ClientServicing.csproj", "{ED5BA273-53C1-44ED-956C-599752064B9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.WebAPI.Authentication", "Polly_C.Horizon.WebAPI.Authentication\Polly_C.Horizon.WebAPI.Authentication.csproj", "{D354349D-30E5-4F36-AEAE-23DD7DC3BF57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API Gateway", "API Gateway", "{9766668A-EB56-4C48-B7A8-C0E6B1F14A0A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.Gateway.Ocelot.WebAPI", "Polly_C.Horizon.Gateway.Ocelot.WebAPI\Polly_C.Horizon.Gateway.Ocelot.WebAPI.csproj", "{05C0C735-5F66-4344-9026-ADA10AA524C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.Gateway.IdentityServer.WebAPI", "Polly_C.Horizon.Gateway.IdentityServer.WebAPI\Polly_C.Horizon.Gateway.IdentityServer.WebAPI.csproj", "{764C6F18-84FF-4ED3-8A45-ADFA4190C076}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.UI", "Polly_C.Horizon.UI\Polly_C.Horizon.UI.csproj", "{C64DE93B-88EA-432D-B6E0-361EFFC7E8AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.Data.Polly_C", "Polly_C.Horizon.Data.Polly_C\Polly_C.Horizon.Data.Polly_C.csproj", "{5E51BD09-DB68-4C28-AEB4-4077AF81777E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5AEFE3A0-E52C-4D7F-B68B-9DB785E315C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman Scripts", "Postman Scripts", "{93210A43-39A3-4E66-B6C5-CDE759F2A2D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{D4954E82-E101-4DD4-952C-1D84E6CD2064}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\PostmanScripts\Integration\IdentityServerSetup.json = Tests\PostmanScripts\Integration\IdentityServerSetup.json
+		Tests\PostmanScripts\Integration\NewPolicyV1.json = Tests\PostmanScripts\Integration\NewPolicyV1.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.Data.Customer", "Polly_C.Horizon.Data.Customer\Polly_C.Horizon.Data.Customer.csproj", "{1C23998E-4E03-4C4A-A229-F48361832FD4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polly_C.Horizon.Service", "Polly_C.Horizon.Service\Polly_C.Horizon.Service.csproj", "{67755A95-591E-4DD3-8BBC-4803F9350ADD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5414F8D8-00A3-4414-A7D0-EC3D174AEB32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{115F3C5C-3AAF-4A0B-A3C8-26D9F76FF23C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{5E620660-AE82-48F1-B103-2792CC510514}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{3DCB54FD-A946-4C87-9924-8F195756EE0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{D5AD02E5-1044-49FA-8787-48E79804E6C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{34FC9749-DC35-42A7-85A6-2F3EFAE82EC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polly_C.Horizon.ClientServicing.Test", "Polly_C.Horizon.ClientServicing.Test\Polly_C.Horizon.ClientServicing.Test.csproj", "{22D54097-70D5-4034-8B93-C6DC7F111F7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87C968B8-0E74-45F9-86CA-B6CF74437897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87C968B8-0E74-45F9-86CA-B6CF74437897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87C968B8-0E74-45F9-86CA-B6CF74437897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87C968B8-0E74-45F9-86CA-B6CF74437897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACD19FF-04F6-4B5E-9B38-C7127C28DF20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACD19FF-04F6-4B5E-9B38-C7127C28DF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACD19FF-04F6-4B5E-9B38-C7127C28DF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACD19FF-04F6-4B5E-9B38-C7127C28DF20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51717F8A-B3D3-4B29-AAD3-D00DC13ACAF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51717F8A-B3D3-4B29-AAD3-D00DC13ACAF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51717F8A-B3D3-4B29-AAD3-D00DC13ACAF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51717F8A-B3D3-4B29-AAD3-D00DC13ACAF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED5BA273-53C1-44ED-956C-599752064B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED5BA273-53C1-44ED-956C-599752064B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED5BA273-53C1-44ED-956C-599752064B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED5BA273-53C1-44ED-956C-599752064B9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D354349D-30E5-4F36-AEAE-23DD7DC3BF57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D354349D-30E5-4F36-AEAE-23DD7DC3BF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D354349D-30E5-4F36-AEAE-23DD7DC3BF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D354349D-30E5-4F36-AEAE-23DD7DC3BF57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C0C735-5F66-4344-9026-ADA10AA524C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C0C735-5F66-4344-9026-ADA10AA524C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C0C735-5F66-4344-9026-ADA10AA524C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C0C735-5F66-4344-9026-ADA10AA524C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{764C6F18-84FF-4ED3-8A45-ADFA4190C076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{764C6F18-84FF-4ED3-8A45-ADFA4190C076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{764C6F18-84FF-4ED3-8A45-ADFA4190C076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{764C6F18-84FF-4ED3-8A45-ADFA4190C076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C64DE93B-88EA-432D-B6E0-361EFFC7E8AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C64DE93B-88EA-432D-B6E0-361EFFC7E8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C64DE93B-88EA-432D-B6E0-361EFFC7E8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C64DE93B-88EA-432D-B6E0-361EFFC7E8AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E51BD09-DB68-4C28-AEB4-4077AF81777E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E51BD09-DB68-4C28-AEB4-4077AF81777E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E51BD09-DB68-4C28-AEB4-4077AF81777E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E51BD09-DB68-4C28-AEB4-4077AF81777E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C23998E-4E03-4C4A-A229-F48361832FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C23998E-4E03-4C4A-A229-F48361832FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C23998E-4E03-4C4A-A229-F48361832FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C23998E-4E03-4C4A-A229-F48361832FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67755A95-591E-4DD3-8BBC-4803F9350ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67755A95-591E-4DD3-8BBC-4803F9350ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67755A95-591E-4DD3-8BBC-4803F9350ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67755A95-591E-4DD3-8BBC-4803F9350ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D54097-70D5-4034-8B93-C6DC7F111F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D54097-70D5-4034-8B93-C6DC7F111F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D54097-70D5-4034-8B93-C6DC7F111F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D54097-70D5-4034-8B93-C6DC7F111F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87C968B8-0E74-45F9-86CA-B6CF74437897} = {115F3C5C-3AAF-4A0B-A3C8-26D9F76FF23C}
+		{FACD19FF-04F6-4B5E-9B38-C7127C28DF20} = {D5AD02E5-1044-49FA-8787-48E79804E6C4}
+		{51717F8A-B3D3-4B29-AAD3-D00DC13ACAF4} = {3DCB54FD-A946-4C87-9924-8F195756EE0E}
+		{ED5BA273-53C1-44ED-956C-599752064B9B} = {3DCB54FD-A946-4C87-9924-8F195756EE0E}
+		{D354349D-30E5-4F36-AEAE-23DD7DC3BF57} = {3DCB54FD-A946-4C87-9924-8F195756EE0E}
+		{05C0C735-5F66-4344-9026-ADA10AA524C9} = {9766668A-EB56-4C48-B7A8-C0E6B1F14A0A}
+		{764C6F18-84FF-4ED3-8A45-ADFA4190C076} = {9766668A-EB56-4C48-B7A8-C0E6B1F14A0A}
+		{C64DE93B-88EA-432D-B6E0-361EFFC7E8AE} = {34FC9749-DC35-42A7-85A6-2F3EFAE82EC8}
+		{5E51BD09-DB68-4C28-AEB4-4077AF81777E} = {5414F8D8-00A3-4414-A7D0-EC3D174AEB32}
+		{93210A43-39A3-4E66-B6C5-CDE759F2A2D7} = {5AEFE3A0-E52C-4D7F-B68B-9DB785E315C6}
+		{D4954E82-E101-4DD4-952C-1D84E6CD2064} = {93210A43-39A3-4E66-B6C5-CDE759F2A2D7}
+		{1C23998E-4E03-4C4A-A229-F48361832FD4} = {5414F8D8-00A3-4414-A7D0-EC3D174AEB32}
+		{67755A95-591E-4DD3-8BBC-4803F9350ADD} = {5E620660-AE82-48F1-B103-2792CC510514}
+		{22D54097-70D5-4034-8B93-C6DC7F111F7B} = {5AEFE3A0-E52C-4D7F-B68B-9DB785E315C6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F96CC156-3C24-4EF4-8162-CBA949ED5D76}
+	EndGlobalSection
+EndGlobal

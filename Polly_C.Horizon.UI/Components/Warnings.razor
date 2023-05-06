@@ -1,0 +1,16 @@
+﻿
+<div class="alert_dlg" style="@("display:" + ((showAlertError || showAlertSuccess || showAlertWarning) ? "block" : "none") + ";")">
+    <RadzenCard>
+        <div style="background-color:#F7E2C4; border-radius:4px 4px 4px 4px;">
+            <div style="color:rgb(204, 122, 0); font-family:roboto, sans-serif; font-weight:400; font-size:16px;">@alertWarningMessage</div>
+        </div>
+    </RadzenCard>
+</div>
+
+@code {
+    bool isLoading = false;
+    bool showAlertError = false;
+    bool showAlertSuccess = false;
+    bool showAlertWarning = false;
+    bool alertWarningMessage = false;
+}

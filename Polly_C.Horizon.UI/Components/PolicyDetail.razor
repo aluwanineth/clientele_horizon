@@ -1,0 +1,495 @@
+﻿@inject IClientServicingWebApiWrapper _ClientServicingWebApiWrapper
+<div>
+    <div class="policy-data">
+        <RadzenCard Style="--rz-card-background-color:navy;color:white;">
+            <RadzenRow>
+                <RadzenColumn>
+                    <p class="policyDetail">Policy Details</p>
+                </RadzenColumn>
+                <RadzenColumn>
+                    <p class="policyDetail">Member Details</p>
+                </RadzenColumn>
+                <RadzenColumn>
+                    <p class="policyDetail">Premium Details</p>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+        <RadzenPanel AllowCollapse="true" Class="rz-my-10 rz-mx-auto" Expand=@(() => Change("Panel expanded")) Collapse=@(() => Change("Panel collapsed"))>
+            <ChildContent>
+                <RadzenRow>
+                    <RadzenColumn>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Master Contract:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Legacy Policy Number:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Entity Number:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Annual Increase:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Date of Commencement:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Reinstatement Date of Commencement:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Lapsed Date:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Cancelled Date:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Sales Venue:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Sales Person:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Campaign Code:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Policy Fee:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Capture Date:
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Preferred Communication Method:
+                                <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                <RadzenDropDown class="frm_input" AllowClear="false" AllowFiltering="false" Data="@SelectTelecomTypesList" TextProperty="item_description" ValueProperty="item_id" @bind-Value=selectedTelecomTypeInt Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                            </RadzenStack>
+                        </RadzenStack>
+                    </RadzenColumn>
+                    <RadzenColumn>
+                        <form>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Title:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")">@(selectedTitle ?? "")</span>
+                                    <RadzenDropDown class="frm_input" AllowClear="false" AllowFiltering="false" Data="@TitlesList" TextProperty="item_description" ValueProperty="item_id" @bind-Value=selectedTitleInt Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="surname" class="col-sm-2 col-form-label">Surname:</label>
+                                <div class="col-sm-10">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="idNumber" class="col-sm-2 col-form-label">ID Number:</label>
+                                <div class="col-sm-10">
+                                    @*span>@(IDNumber ?? "")</span>*@
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="passport" class="col-sm-2 col-form-label">Passport Number:</label>
+                                <div class="col-sm-10">
+                                    @*span>@(IDNumber ?? "")</span>*@
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Fax Number:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Home Number:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email Address:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Cell Number:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Physical Address:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Postal Address:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Suburb:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Suburb:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">City:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">City:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Postal Code:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                                <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Postal Code:</label>
+                                <div class="col-sm-4">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenTextBox class="frm_input" Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="surname" class="col-sm-2 col-form-label">Gender:</label>
+                                <div class="col-sm-10">
+                                    <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                                    <RadzenDropDown class="frm_input" AllowClear="false" AllowFiltering="false" Data="@GenderList" TextProperty="item_description" ValueProperty="item_id" @bind-Value=selectedGenderInt Style="@("display:" + (isEditing ? "block" : "none") + ";")" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="surname" class="col-sm-2 col-form-label">Smoke?:</label>
+                                <div class="col-sm-10">
+                                    <span>@(((Smoker ?? false) ? "Yes" : "No"))</span>
+                                </div>
+                            </div>
+                        </form>
+                    </RadzenColumn>
+                    <RadzenColumn>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Last Billing Date:
+                                <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Last Paid Date:
+                                <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Next Billing Date:
+                                <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Policy Premium Amount:
+                                <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Premium Count:
+                                <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                            </RadzenStack>
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                            <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                                Payment Frequency:
+                                <span style="@("display:" + (isEditing ? "none" : "block") + ";")"></span>
+                            </RadzenStack>
+                        </RadzenStack>
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0">
+                    <RadzenButton Text="Cancel" ButtonStyle="ButtonStyle.Danger" Click="@(args => ToggleEdit())" Visible=isEditing />
+                    <RadzenButton Text="@(isEditing ? "Save" : "Edit")" ButtonStyle="ButtonStyle.Info" Click="@(args => ToggleEdit())" />
+                </RadzenStack>
+            </ChildContent>
+        </RadzenPanel>
+    </div>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public EventCallback onPolicySelect { get; set; }
+    [CascadingParameter]
+    int  PolicyNumber { get; set; } 
+    bool isLoading = false;
+    bool showAlertError = false;
+    bool showAlertSuccess = false;
+    bool showAlertWarning = false;
+    bool alertWarningMessage = false;
+    bool isEditing = false;
+    public bool? Smoker { get; set; } = false;
+    List<SelectListItem> TitlesList { get; set; } = new List<SelectListItem>();
+    public string? selectedTitle { get; set; }
+    public int selectedTitleInt;
+    List<SelectListItem> GenderList { get; set; } = new List<SelectListItem>();
+    public string? selectedGender { get; set; }
+    public int selectedGenderInt;
+    List<SelectListItem> PaymentFeqList { get; set; } = new List<SelectListItem>();
+    public string? selectedPaymentFeq { get; set; }
+    public int selectedPaymentFeqInt;
+    List<SelectListItem> SmokerList { get; set; } = new List<SelectListItem>();
+    public string? selectedSmoker { get; set; }
+    public int selectedSmokerInt;
+    GetPolicyAndMainMemberDetailsResult policyAndMasterDetailModel = new GetPolicyAndMainMemberDetailsResult();
+    List<SelectListItem> SelectTelecomTypesList = new List<SelectListItem>();
+    int selectedTelecomTypeInt;
+    string selectedTelecomType;
+
+    private void OnStateHasChanged()
+    {
+        StateHasChanged();
+    }
+
+    private void ToggleEdit()
+    {
+        if (isEditing)
+        {
+            isEditing = false;
+        }
+        else
+        {
+            isEditing = true;
+        }
+
+    }
+
+    void Change(string text)
+    {
+
+    }
+
+    public async Task LoadData()
+    {
+        isEditing = false;
+        StateHasChanged();
+        try
+        {
+            var request = new GetPolicyAndMainMemberDetailsRequest
+                {
+                    PolicyNo = PolicyNumber
+                };
+            var policyDetailsResult = await _ClientServicingWebApiWrapper.GetPolicyAndMainMemberDetails(request);
+
+            policyAndMasterDetailModel = policyDetailsResult.Data.FirstOrDefault(x => x.Policy_NO == request.PolicyNo);
+
+
+            var genderRequest = new GenderSelectRequest
+                {
+                    Disp_Seq = null,
+                    Eff_Date = null,
+                    Exp_Date = null,
+                    Gender_CD = null,
+                    S_Desc = null
+                };
+
+            var genderResult = await _ClientServicingWebApiWrapper.GetGendersLookups(genderRequest);
+
+            var paymentFeqRequest = new PaymentFrequentSelectRequest
+                {
+                    Disp_Seq = null,
+                    Eff_Date = null,
+                    Exp_Date = null,
+                    Payment_Freq_CD = null,
+                    Short_Desc = null
+                };
+
+            var paymentFeqResult = await _ClientServicingWebApiWrapper.GetPaymentFrequentLookups(paymentFeqRequest);
+
+            var tittleRequest = new TitleSelectRequest
+                {
+                    Disp_Seq = null,
+                    Eff_Date = null,
+                    Exp_Date = null,
+                    Title_CD = null,
+                    S_Desc = null
+                };
+
+            var tittleResult = await _ClientServicingWebApiWrapper.GetTittlesLookups(tittleRequest);
+
+            var smokerRequest = new SmokerSelectRequest
+                {
+                    Disp_Seq = null,
+                    Eff_Date = null,
+                    Exp_Date = null,
+                    Smoker_CD = null,
+                    S_Desc = null
+                };
+
+            var smokerResult = await _ClientServicingWebApiWrapper.GetSmokerLookups(smokerRequest);
+
+            if (!(tittleResult.Data == null))
+            {
+
+                foreach(var tittle in tittleResult.Data)
+                {
+                    TitlesList.Add(new SelectListItem((int)tittle.Title_CD, tittle.S_Desc));
+
+                    if (policyAndMasterDetailModel.TitleID == null && (int)tittle.Title_CD == policyAndMasterDetailModel.TitleID)
+                    {
+                        selectedTitle = tittle.S_Desc;
+                        selectedTitleInt = (int)tittle.Title_CD;
+                    }
+                }
+            }
+
+            if (!(genderResult.Data == null))
+            {
+
+                foreach (var gender in genderResult.Data)
+                {
+                    GenderList.Add(new SelectListItem(gender.Gender_CD, gender.S_Desc));
+
+                    if (policyAndMasterDetailModel.GenderCD == null && gender.Gender_CD == policyAndMasterDetailModel.GenderCD)
+                    {
+                        selectedGender = gender.S_Desc;
+                        selectedGenderInt = gender.Gender_CD;
+                    }
+                }
+            }
+
+            if (!(paymentFeqResult.Data == null))
+            {
+
+                foreach (var paymentFeq in paymentFeqResult.Data)
+                {
+                    PaymentFeqList.Add(new SelectListItem(paymentFeq.Payment_Freq_CD, paymentFeq.Short_Desc));
+
+                    if (policyAndMasterDetailModel.PaymentFrequency == null && paymentFeq.Short_Desc == policyAndMasterDetailModel.PaymentFrequency)
+                    {
+                        selectedPaymentFeq = paymentFeq.Short_Desc;
+                        selectedPaymentFeqInt = paymentFeq.Payment_Freq_CD;
+                    }
+                }
+            }
+
+            if (!(smokerResult.Data == null))
+            {
+
+                foreach (var smoker in smokerResult.Data)
+                {
+                    SmokerList.Add(new SelectListItem((int)smoker.Smoker_CD, smoker.S_Desc));
+
+                    if (policyAndMasterDetailModel.SmokerCD == null && (int)smoker.Smoker_CD == policyAndMasterDetailModel.SmokerCD)
+                    {
+                        selectedSmoker = smoker.S_Desc;
+                        selectedPaymentFeqInt = (int)smoker.Smoker_CD;
+                    }
+                }
+            }
+
+            SelectTelecomTypesList.Add(new SelectListItem(1, "Email"));
+            SelectTelecomTypesList.Add(new SelectListItem(2, "Mobile No"));
+
+            if (selectedTitle == null)
+            {
+                selectedTitle = "UNDEFINED";
+            }
+
+            if (selectedGender == null)
+            {
+                selectedGender = "UNDEFINED";
+            }
+
+            if (selectedPaymentFeq == null)
+            {
+                selectedPaymentFeq = "UNDEFINED";
+            }
+
+            if (selectedSmoker == null)
+            {
+                selectedSmoker = "UNDEFINED";
+            }
+
+            if ((!(policyAndMasterDetailModel.PreferredCell == null)) && (policyAndMasterDetailModel.PreferredCell.Value))
+            {
+                selectedTelecomType = SelectTelecomTypesList[0].item_description;
+                selectedTelecomTypeInt = SelectTelecomTypesList[0].item_id;
+            }
+            else if ((!(policyAndMasterDetailModel.PreferredEmail == null)) && (policyAndMasterDetailModel.PreferredEmail.Value))
+            {
+                selectedTelecomType = SelectTelecomTypesList[1].item_description;
+                selectedTelecomTypeInt = SelectTelecomTypesList[0].item_id;
+            }
+            else
+            {
+                selectedTelecomType = "UNDEFINED";
+            }
+            if (policyAndMasterDetailModel.SmokerCD == 0)
+                Smoker = false;
+            else
+                Smoker = true;
+        }
+        catch (Exception ex)
+        {
+            
+        }
+
+    }
+}

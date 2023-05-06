@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "1affb30f-d514-4d6d-a784-2597135935fc",
+		"name": "IdentityServerSetup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "RegisterAdmin",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"user-agent": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"horizon_test_adm\",\r\n  \"password\": \"4ExGGe@Ko#120RT\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://horizontest.clientele.co.za/horizon.identity/api/RoleManagement/enroll-admin",
+					"protocol": "https",
+					"host": [
+						"horizontest",
+						"clientele",
+						"co",
+						"za"
+					],
+					"path": [
+						"horizon.identity",
+						"api",
+						"RoleManagement",
+						"enroll-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"auth_url\", \"https://horizon.clientele.co.za/test-auth/api/authenticate/login\");\r",
+							"pm.environment.set(\"username\", \"horizon_test_adm\");\r",
+							"pm.environment.set(\"password\", \"4ExGGe@Ko#120RT\");\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"auth_url\"),\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Accept': '*/*',\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"       raw: JSON.stringify({\r",
+							"        \"username\": pm.environment.get(\"username\"),\r",
+							"        \"password\": pm.environment.get(\"password\")\r",
+							"        }\r",
+							"),\r",
+							"    options: {\r",
+							"        raw: {\r",
+							"            language: 'json'\r",
+							"        }\r",
+							"    }\r",
+							"    }\r",
+							"},\r",
+							"    (err, res) => {\r",
+							"        // Set BEARERTOKEN\r",
+							"        pm.globals.set(\"BEARERTOKEN\", res.json().token)\r",
+							"        console.log(res.json());\r",
+							"    });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BEARERTOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"SinGUI_test\",\r\n  \"password\": \"y0QN@@Fxyx0y\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://horizontest.clientele.co.za/horizon.identity/api/RoleManagement/register-user",
+					"protocol": "https",
+					"host": [
+						"horizontest",
+						"clientele",
+						"co",
+						"za"
+					],
+					"path": [
+						"horizon.identity",
+						"api",
+						"RoleManagement",
+						"register-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RollPolicyCreate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"auth_url\", \"https://horizon.clientele.co.za/test-auth/api/authenticate/login\");\r",
+							"pm.environment.set(\"username\", \"horizon_test_adm\");\r",
+							"pm.environment.set(\"password\", \"4ExGGe@Ko#120RT\");\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"auth_url\"),\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Accept': '*/*',\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"       raw: JSON.stringify({\r",
+							"        \"username\": pm.environment.get(\"username\"),\r",
+							"        \"password\": pm.environment.get(\"password\")\r",
+							"        }\r",
+							"),\r",
+							"    options: {\r",
+							"        raw: {\r",
+							"            language: 'json'\r",
+							"        }\r",
+							"    }\r",
+							"    }\r",
+							"},\r",
+							"    (err, res) => {\r",
+							"        // Set BEARERTOKEN\r",
+							"        pm.globals.set(\"BEARERTOKEN\", res.json().token)\r",
+							"        console.log(res.json());\r",
+							"    });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BEARERTOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"PolicyCreate\"\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://horizontest.clientele.co.za/horizon.identity/api/RoleManagement/create-role",
+					"protocol": "https",
+					"host": [
+						"horizontest",
+						"clientele",
+						"co",
+						"za"
+					],
+					"path": [
+						"horizon.identity",
+						"api",
+						"RoleManagement",
+						"create-role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EnrollPolicyCreate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"auth_url\", \"https://horizon.clientele.co.za/test-auth/api/authenticate/login\");\r",
+							"pm.environment.set(\"username\", \"horizon_test_adm\");\r",
+							"pm.environment.set(\"password\", \"4ExGGe@Ko#120RT\");\r",
+							"pm.sendRequest({\r",
+							"    url: pm.environment.get(\"auth_url\"),\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Accept': '*/*',\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"       raw: JSON.stringify({\r",
+							"        \"username\": pm.environment.get(\"username\"),\r",
+							"        \"password\": pm.environment.get(\"password\")\r",
+							"        }\r",
+							"),\r",
+							"    options: {\r",
+							"        raw: {\r",
+							"            language: 'json'\r",
+							"        }\r",
+							"    }\r",
+							"    }\r",
+							"},\r",
+							"    (err, res) => {\r",
+							"        // Set BEARERTOKEN\r",
+							"        pm.globals.set(\"BEARERTOKEN\", res.json().token)\r",
+							"        console.log(res.json());\r",
+							"    });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BEARERTOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"SinGUI_test\",\r\n  \"role\": \"PolicyCreate\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://horizontest.clientele.co.za/horizon.identity/api/RoleManagement/enroll-user",
+					"protocol": "https",
+					"host": [
+						"horizontest",
+						"clientele",
+						"co",
+						"za"
+					],
+					"path": [
+						"horizon.identity",
+						"api",
+						"RoleManagement",
+						"enroll-user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Features\**" />
+		<EmbeddedResource Remove="Features\**" />
+		<None Remove="Features\**" />
+	</ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="12.0.1" />
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Polly_C.Horizon.Data.Customer\Polly_C.Horizon.Data.Customer.csproj" />
+    <ProjectReference Include="..\Polly_C.Horizon.Data.Polly_C\Polly_C.Horizon.Data.Polly_C.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,94 @@
+﻿@inject DialogService DialogService
+
+<RadzenDialog>
+    <RadzenAxisTitle Text="Benefit Details" Style="--rz-card-background-color:navy;color:white;" />
+    <RadzenContent>
+        <RadzenColumn Size="6" class="rz-py-5">
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Title:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Relation:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Relation Type:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">First Name:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Surname:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">ID Number:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Passport Number:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Nationality:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Date of Birth:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Age at Next Birthday:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+        </RadzenColumn>
+        <RadzenColumn Size="6" class="rz-py-5">
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Date of Commencement:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Gender:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Cell Number:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Waiting Period:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Is Covered:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Is Student:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn class="rz-py-5">Is Free:</RadzenColumn>
+                <RadzenColumn class="rz-py-5"></RadzenColumn>
+            </RadzenRow>
+        </RadzenColumn>
+    </RadzenContent>
+    <RadzenFooter>
+        <RadzenButton Text="Back" ButtonStyle="ButtonStyle.Secondary" Click=@CloseDialog />
+    </RadzenFooter>
+</RadzenDialog>
+
+@code {
+    [Parameter]
+    public int BenefitID { get; set; }
+
+    public dynamic BenefitDetail { get; set; }
+
+    public void CloseDialog()
+    {
+        DialogService.Close();
+    }
+}

@@ -1,0 +1,67 @@
+﻿@using Polly_C.Horizon.Models.DTOs.ClientServicing.Results;
+@using Polly_C.Horizon.UI.AppState;
+@inject NavigationManager NavigationManager;
+@inject SelectedPolicyState SelectedPolicyState;
+
+<RadzenDataGrid class="grid-format policy-search-grid-format" @ref="CustomerPolicyGrid" Data="@CustomerPolicyData"
+    AllowColumnResize="true" AllowSorting="true" PageSize="12" AllowPaging="true"
+    PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" TItem="PersonSearchResult"
+                LogicalFilterOperator="LogicalFilterOperator.Or" EditMode="DataGridEditMode.Single" RowClick="SelectPolicyAndPopulateCustomerDetail" @bind-Value=@SelectedPolicy>
+    <EmptyTemplate>
+        <p class="empty-text">@emptyText</p>
+    </EmptyTemplate>
+    <Columns>
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="PolicyNo" Title="Policy No."  />
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="Agency" Title="IFA&#47;Broker&#47;Agency Number"/>
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="PlanTypeDescr" Title="Product Name"/>
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="Status" Title="Status" />
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="DateOfCommencement" Title="Status Date" FormatString="{0:d}" />
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="DateOfCommencement" Title="DOC" FormatString="{0:d}"/>
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="Payor" Title="Payer"/>
+        <RadzenDataGridColumn TItem="PersonSearchResult" Property="Payor" Title="Main Member" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+
+    string emptyText = "No Items to display!";
+    [CascadingParameter]
+    public RadzenDataGrid<PersonSearchResult> CustomerPolicyGrid { get; set; }
+    [CascadingParameter]
+    public List<PersonSearchResult> CustomerPolicyData { get; set; }
+    [CascadingParameter]
+    public IList<PersonSearchResult> SelectedPolicy{ get; set; }
+    [CascadingParameter]
+    public CustomerDetail customerDetail { get; set; } = new();
+    [CascadingParameter]
+    public UserDetails userInfo { get; set; }
+
+    public void SelectPolicyAndPopulateCustomerDetail(DataGridRowMouseEventArgs<PersonSearchResult> Arg)
+    {
+        userInfo.FirstName = Arg.Data.EntityName;
+        userInfo.Surname = Arg.Data.EntitySurname;
+        userInfo.LegacyPolicyNumber = Arg.Data.LegacyPolicyNo;
+        userInfo.CellphoneNumber = Arg.Data.CellphoneNumber;
+        userInfo.EmailAddress = Arg.Data.EmailAddress;
+
+        customerDetail.EmailAddress = Arg.Data.EmailAddress;
+        customerDetail.EntityNo = Arg.Data.EntityNo;
+        customerDetail.FirstName = Arg.Data.EntityName;
+        customerDetail.Surname = Arg.Data.EntitySurname;
+        customerDetail.LegacyPolicyNumber = Arg.Data.LegacyPolicyNo;
+        customerDetail.CellphoneNumber = Arg.Data.CellphoneNumber;
+
+        customerDetail.Policy = new()
+            {
+                IFANo = Arg.Data.Agency,
+                DebiCheckStatus = Arg.Data.DebiCheckStatus,
+                Payer = Arg.Data.Payor,
+                PolicyStatus = Arg.Data.Status,
+                Policy_Premium = Arg.Data.PremiumAmt,
+                SalesPerson = Arg.Data.SalesPerson,
+                EntityNo = Arg.Data.EntityNo.ToString()
+            };
+        SelectedPolicyState.SetPolicyInfo(Arg.Data.LegacyPolicyNo, $"{Arg.Data.EntityName} {Arg.Data.EntitySurname}");
+        NavigationManager.NavigateTo("/PolicyDetails");
+    }
+}

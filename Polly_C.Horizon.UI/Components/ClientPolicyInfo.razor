@@ -1,0 +1,66 @@
+﻿
+<div class="display-box-container">
+    <div class="col-2 display-box-card">
+        <div class="search-label">
+            Payer Name &amp; Surname
+        </div>
+        <div class="user-data">
+            @customerPolicy.Payer
+        </div>
+    </div>
+    <div class="col-2 display-box-card">
+        <div class="search-label">
+            Main Member Name &amp; Surname
+        </div>
+        <div class="user-data">
+            @customerPolicy.MainMemberFullName
+        </div>
+    </div>
+    <div class="col-1 display-box-card">
+        <div class="search-label">
+            Premium Amount
+        </div>
+        <div class="user-data">
+            @customerPolicy.Policy_Premium
+        </div>
+    </div>
+    <div class="col-2 display-box-card">
+        <div class="search-label">
+            Rewards Status
+        </div>
+        <div class="user-data">
+        </div>
+    </div>
+    <div class="col display-box-card">
+        <div class="search-label">
+            Status
+        </div>
+        <div class="user-data">
+            @customerPolicy.PolicyStatus
+        </div>
+    </div>
+    <div class="col display-box-card">
+        <div class="search-label">
+            DebitCheck Status
+        </div>
+        <div class="user-data">
+            @customerPolicy.DebiCheckStatus
+        </div>
+     </div>
+    <div class="col display-box-card">
+        <div class="search-label">
+            Sales Person
+        </div>
+        <div class="user-data">
+            @customerPolicy.SalesPerson
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public CustomerPolicy customerPolicy { get; set; } = new();
+
+    [CascadingParameter]
+    public UserDetails userDetail { get; set; } = new();
+}

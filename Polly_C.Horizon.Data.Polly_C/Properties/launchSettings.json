@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Polly_C.Horizon.Data.Polly_C": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56106;http://localhost:56107"
+    }
+  }
+}

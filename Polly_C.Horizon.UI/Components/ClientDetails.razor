@@ -1,0 +1,18 @@
+﻿
+<RadzenCard class="member-details-top">
+    <div class="row col-12">
+        <div class="col-4">
+            Client: @($"{customerDetail.FirstName} {customerDetail.Surname} ({customerDetail.LegacyPolicyNumber})")
+        </div>
+        <div class="col-4 client-details">
+            Email Address: @(customerDetail.EmailAddress ?? "")
+        </div>
+        <div class="col-4 client-details">
+            Cellphone Number: @(customerDetail.CellphoneNumber ?? "")
+        </div>
+    </div>
+</RadzenCard>
+@code {
+    [CascadingParameter]
+    public CustomerDetail customerDetail { get; set; }
+}

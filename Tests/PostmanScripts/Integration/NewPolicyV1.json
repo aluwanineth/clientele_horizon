@@ -1,0 +1,92 @@
+{
+  "info": {
+    "_postman_id": "f89b5b3c-12bf-42c7-b7f7-4e3fb5d96da1",
+    "name": "New Policy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"auth_url\", \"https://horizon.clientele.co.za/test-auth/api/authenticate/login\");\r",
+              "pm.environment.set(\"username\", \"***_***\");\r",
+              "pm.environment.set(\"password\", \"********\");\r",
+              "pm.sendRequest({\r",
+              "    url: pm.environment.get(\"auth_url\"),\r",
+              "    method: 'POST',\r",
+              "    header: {\r",
+              "        'Accept': '*/*',\r",
+              "        'Content-Type': 'application/json'\r",
+              "    },\r",
+              "    body: {\r",
+              "        mode: 'raw',\r",
+              "       raw: JSON.stringify({\r",
+              "        \"username\": pm.environment.get(\"username\"),\r",
+              "        \"password\": pm.environment.get(\"password\")\r",
+              "        }\r",
+              "),\r",
+              "    options: {\r",
+              "        raw: {\r",
+              "            language: 'json'\r",
+              "        }\r",
+              "    }\r",
+              "    }\r",
+              "},\r",
+              "    (err, res) => {\r",
+              "        // Set BEARERTOKEN\r",
+              "        pm.globals.set(\"BEARERTOKEN\", res.json().token)\r",
+              "        console.log(res.json());\r",
+              "    });\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{BEARERTOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"policy\": {\r\n\t\t\"source\": \"Demo\",\r\n\t\t\"status\": \"Active\",\r\n\t\t\"saleDivision\": \"Ticket\",\r\n\t\t\"agentName\": \"James Bond\",\r\n\t\t\"agentCode\": \"DEM007\",\r\n\t\t\"sourcePolicyNumber\": \"KPOL001\",\r\n\t\t\"captureDate\": \"2023-03-01T12:49:29.490Z\",\r\n\t\t\"newInceptionDate\": \"2023-03-01T12:49:29.490Z\",\r\n\t\t\"product\": {\r\n\t\t\t\"masterContractProductCode\": \"\",\r\n\t\t\t\"productCode\": \"KB\",\r\n\t\t\t\"premium\": 5.0,\r\n\t\t\t\"partnerCD\": 19,\r\n\t\t\t\"schemeCD\": \"\"\r\n\t\t},\r\n\t\t\"entities\": [\r\n\t\t\t{\r\n\t\t\t\t\"entityType\": \"MainMember\",\r\n\t\t\t\t\"allocationPercentage\": 100,\r\n\t\t\t\t\"physicalAddress\": {\r\n\t\t\t\t\t\"addressLine1\": \"1 Alon Road\",\r\n\t\t\t\t\t\"addressLine2\": \"Clientèle Office Park\",\r\n\t\t\t\t\t\"suburb\": \"Sandton\",\r\n\t\t\t\t\t\"city\": \"Johannesburg\",\r\n\t\t\t\t\t\"postalCode\": \"2000\"\r\n\t\t\t\t},\r\n\t\t\t\t\"postalAddress\": {\r\n\t\t\t\t\t\"addressLine1\": \"PO Box 123\",\r\n\t\t\t\t\t\"addressLine2\": \"Private Bag x01\",\r\n\t\t\t\t\t\"suburb\": \"Sandton\",\r\n\t\t\t\t\t\"city\": \"Johannesburg\",\r\n\t\t\t\t\t\"postalCode\": \"2000\"\r\n\t\t\t\t},\r\n\t\t\t\t\"contactDetails\": {\r\n\t\t\t\t\t\"homeNumber\": \"0118070000\",\r\n\t\t\t\t\t\"workNumber\": \"0118070001\",\r\n\t\t\t\t\t\"mobileNumber\": \"0818070001\",\r\n\t\t\t\t\t\"faxNumber\": \"0868070001\",\r\n\t\t\t\t\t\"emailAddress\": \"test@example.com\"\r\n\t\t\t\t},\r\n\t\t\t\t\"personalDetails\": {\r\n\t\t\t\t\t\"firstName\": \"James\",\r\n\t\t\t\t\t\"lastName\": \"Bond\",\r\n\t\t\t\t\t\"doB\": \"2020-01-01\",\r\n\t\t\t\t\t\"legalReferenceNumber\": \"2001014800086\",\r\n\t\t\t\t\t\"legalReferenceNumberType\": \"SAIDNumber\"\r\n\t\t\t\t},\r\n\t\t\t\t\"benefits\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"benefitName\": \"Cover\",\r\n\t\t\t\t\t\t\"benefitCode\": \"KBB\",\r\n\t\t\t\t\t\t\"coverAmount\": 5.0,\r\n\t\t\t\t\t\t\"premium\": 5.0,\r\n\t\t\t\t\t\t\"status\": \"Active\"\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t]\r\n\t},\r\n\t\"messageId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n\t\"messageDateTime\": \"2023-03-01T12:49:29.490Z\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://horizon.clientele.co.za/test-policy/api/v1.0/policies",
+          "protocol": "https",
+          "host": [
+            "horizon",
+            "clientele",
+            "co",
+            "za"
+          ],
+          "path": [
+            "test-policy",
+            "api",
+            "v1.0",
+            "policies"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+﻿@page "/AccountingHistory"
+@using Polly_C.Horizon.UI.Pages
+@inject NavigationManager NavigationManager
+@inject WebApiWrapperInterfaces.ClientServicing.IClientServicingWebApiWrapper clientServicingApiWrapper
+@attribute [Authorize]
+
+<div class="border-info">
+    <InformationBoard OnStateHasChanged="OnStateHasChanged" />
+</div>
+
+<div class="row col-12">
+    <PolicyActionCreateQuote />
+</div>
+ 
+<div class="row col-12">
+    <ClientDetails />
+</div>
+
+<div class="row col-12">
+    <PolicyGrid/>
+</div>
+
+<div class="row col-12 payment-container">
+    <TotalPayment />
+</div>
+    
+<div class="row col-12">
+    <AccountingHistoryGrid></AccountingHistoryGrid>
+</div>
+
+@code {
+
+    private void OnStateHasChanged()
+    {
+        StateHasChanged();
+    }
+}

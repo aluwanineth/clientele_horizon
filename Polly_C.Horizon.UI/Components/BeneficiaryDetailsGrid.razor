@@ -1,0 +1,50 @@
+﻿@using Polly_C.Horizon.Models.DTOs.ClientServicing.Results;
+
+@inject WebApiWrapperInterfaces.ClientServicing.IClientServicingWebApiWrapper ClientServicingWebApi
+@attribute [Authorize]
+
+<RadzenDataGrid class="grid-format beneficiary-details-grid-format" @ref="beneficiaryDetailsGrid" AllowFiltering="true" AllowColumnResize="true"
+                FilterMode="FilterMode.Advanced" Data="PolicyBeneficiaryDetails" AllowSorting="true" PageSize="5" AllowPaging="true"
+                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" TItem="BeneficiaryDetailsResult" ColumnWidth="300px"
+                LogicalFilterOperator="LogicalFilterOperator.Or" EditMode="DataGridEditMode.Single">
+    <EmptyTemplate>
+        <p class="empty-text">@emptyText</p>
+    </EmptyTemplate>
+    <Columns>
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="" Filterable="false" Title="List" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="FullName" Filterable="false" Title="First name & Surname" Width="80px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="Relation" Filterable="false" Title="Relation" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="IDNumber" Filterable="false" Title="ID Number/Passport Number" Width="100px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="" Filterable="false" Title="Percentage Covered" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="" Filterable="false" Title="Benefit Amount" Width="70px" TextAlign="TextAlign.Left" FormatString="{0:yyyy/MM/dd}" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="STATUS" Filterable="false" Title="Status" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="" Filterable="false" Title="Contact Number" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Property="" Filterable="false" Title="Modify" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BeneficiaryDetailsResult" Filterable="false" Sortable="false" Title="Add" TextAlign="TextAlign.Center" Width="30px">
+            <HeaderTemplate>
+                <RadzenButton id="addBtn" Text="Add"></RadzenButton>
+            </HeaderTemplate>
+            <Template>
+                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.ExtraSmall">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.ExtraSmall" class="my-1 ms-1">
+                </RadzenButton>
+            </Template>
+        </RadzenDataGridColumn>
+        
+    </Columns>
+</RadzenDataGrid>
+@code {
+    string emptyText = "No Items to display!";
+
+    [CascadingParameter]
+    public string? EntityNo { get; set; }
+
+    [CascadingParameter]
+    public int? LegPolicyNo { get; set; }
+
+    [Parameter]
+    public List<BeneficiaryDetailsResult> PolicyBeneficiaryDetails { get; set; }
+
+    public RadzenDataGrid<BeneficiaryDetailsResult> beneficiaryDetailsGrid = new RadzenDataGrid<BeneficiaryDetailsResult>();
+}

@@ -1,0 +1,136 @@
+﻿@inject NavigationManager NavigationManager
+
+<RadzenPanelMenu @onclick="@ToggleNavMenu">
+    <RadzenPanelMenuItem Text="Home" Path="\"></RadzenPanelMenuItem>
+
+    @if (customerDetail is not null && customerDetail.EntityNo.HasValue)
+    {
+        <RadzenPanelMenuItem Text="Client Servicing">
+            <RadzenPanelMenuItem Text="Policy Details" Path="PolicyDetails"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Beneficiary Details" Path="BenefiaryDetails"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Benefit Details" Path="BenefitDetails"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Banking Details" Path="Financial/BankDetails"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Accounting History" Path="AccountingHistory"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Audit Log" Path=""></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Broker Details" Path=""></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Additional Quotes" Path=""></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Cancel Policy" Path=""></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Refunds" Path=""></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Cover" Path=""></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="IFA">
+            <RadzenPanelMenuItem Text="Profile"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Business Summary"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Statements"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Bank Details"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Agent Comments"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Club Count"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Earnings"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Accounting History"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Claims">
+            <RadzenPanelMenuItem Text="Claim"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Intimate A Claim"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Accounting History"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Claim History"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Requirements"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Assessment"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Comments"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Claim Events"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Reinsurance">
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Encashment">
+            <RadzenPanelMenuItem Text="Claim Details"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Account History"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Encashment History"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Documents"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Get Value"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Assessments"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Legal Claims">
+            <RadzenPanelMenuItem Text="Policy Details"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="New Claim"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Claims"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Accounting History"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Management"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Incoming Correspon"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Wrap Up"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Comments"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Audits"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Customer Experience Register">
+            <RadzenPanelMenuItem Text="Dashboard"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Complaints Register"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Resolved Complaints"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Communications">
+            <RadzenPanelMenuItem Text="Dashboard"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="News"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Client Communication"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Correspondence"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Documents"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Record Store"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="GPS">
+            <RadzenPanelMenuItem Text="GPS Search"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Tasks"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Batch & Payments"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Summary"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Unclaimed Payments"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Expenditure Monitoring"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Admin"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Error Messaging Service">
+            <RadzenPanelMenuItem Text="Monitoring & ReQueing"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Service Monitor Home"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Messaging Performance"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="EPS">
+            <RadzenPanelMenuItem Text="Payments"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Suppliers"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Supplier Approvals"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Once Off Approvals"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Tasks"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Archive Payments"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Reporting"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+
+        <RadzenPanelMenuItem Text="Horizon CRM">
+            <RadzenPanelMenuItem Text="CRM Dashboard"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Discount Details"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Clients"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Products"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Email"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+    }
+</RadzenPanelMenu>
+
+@code {
+    [CascadingParameter]
+    public CustomerDetail customerDetail { get; set; }
+
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void GoToHomePage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

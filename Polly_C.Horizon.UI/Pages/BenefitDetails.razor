@@ -1,0 +1,47 @@
+﻿@page "/BenefitDetails"
+@attribute [Authorize]
+
+@using Horizon.Models.DTOs.ClientServicing.Requests
+@using Horizon.Models.DTOs.ClientServicing.Results
+@using Horizon.UI.WebApiWrapperInterfaces.ClientServicing
+
+@inject NavigationManager NavigationManager
+@inject IClientServicingWebApiWrapper ClientServingWebApiWrapper
+
+<RadzenRow Style="width:100%">
+    <InformationBoard OnStateHasChanged="OnStateHasChanged" />
+</RadzenRow>
+<RadzenRow Style="width:100%">
+    <div class="client-summary">
+        <PolicyActionCreateQuote />
+    </div>
+</RadzenRow>
+<RadzenRow Style="width:100%">
+    <ClientDetails />
+</RadzenRow>
+<RadzenRow Style="width:100%">
+    <PolicyGrid />
+</RadzenRow>
+<RadzenRow Style="width:100%">
+    <BenefitDetailGrid PolicyMemberExtendedBenefits="PolicyMemberBenefits" />
+</RadzenRow>
+
+@code {
+    [CascadingParameter]
+    public CustomerDetail customerDetail { get; set; }
+
+    private List<BenefitExtendedMemberResult> PolicyMemberBenefits { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (customerDetail is null) NavigationManager.NavigateTo("/");
+
+        var result = await ClientServingWebApiWrapper.GetBenefitExtendedMemberDetails(new BenefitExtendedMemberRequest { PolicyNO = customerDetail.Policy.PolicyNO, EffectiveDate = DateTime.Now });
+        PolicyMemberBenefits = result.Data;
+    }
+
+    private void OnStateHasChanged()
+    {
+        StateHasChanged();
+    }
+}

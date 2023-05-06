@@ -1,0 +1,61 @@
+﻿{
+   "CodeGenerationMode": 3,
+   "ContextClassName": "Polly_CContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Polly_C.Horizon.Data.Polly_C",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[configpr].[spDALC_Payment_FreqSelect]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[configpr].[spDALC_SmokerSelect]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[polmas].[spNewBusinessProcess]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[polmaspr].[spGetBeneficiaryDetails]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[polmaspr].[spGetBenefitExtendedMemberDetails]",
+         "ObjectType": 1
+      },
+      {
+         "Name": "[polmaspr].[spGetPolicyAndMainMemberDetails]",
+         "ObjectType": 1
+      }
+   ],
+   "UiHint": "dv4-polsql-01.Polly_C.",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

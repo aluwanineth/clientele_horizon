@@ -1,0 +1,72 @@
+﻿@using Polly_C.Horizon.UI.DTOs;
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<PageTitle>Horizon | Polly C</PageTitle>
+
+<CascadingValue Value="@userInfo">
+    <CascadingValue Value="@CustomerDetail">
+        <AuthorizeView>
+            <Authorized>
+                <RadzenLayout>
+                    <RadzenRow>
+                        <RadzenColumn Size="2">
+                            <MainLogo />
+                        </RadzenColumn>
+                        <RadzenColumn>
+                            <UserDetail />
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <RadzenRow>
+                        <RadzenColumn Size="2">
+                            <NavMenu />
+                        </RadzenColumn>
+                        <RadzenColumn>
+                            @Body
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <RadzenFooter Style="text-align:right">
+                        &copy;@(DateTime.Now.Year) Horizon v1.0.0. All rights reserved.
+                    </RadzenFooter>
+                </RadzenLayout>
+            </Authorized>
+            <NotAuthorized>
+                <div class="text-center page-container-login">
+                    <main class="form-signin w-100 m-auto">
+                        @Body
+                    </main>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingValue>
+</CascadingValue>
+
+@code
+{
+    [CascadingParameter]
+    UserDetails userInfo { get; set; } = new UserDetails();
+    [CascadingParameter]
+    CustomerDetail CustomerDetail { get; set; } = new();
+
+    [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    bool sidebar1Expanded = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userInfo.Username = await localStorage.GetItemAsync<string>("username");
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            Console.WriteLine($"User {user.Identity.Name} is authenticated.");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("login");
+        }
+    }
+}
+
+

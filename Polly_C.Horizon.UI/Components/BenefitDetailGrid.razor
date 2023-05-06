@@ -1,0 +1,46 @@
+﻿@using Polly_C.Horizon.Models.DTOs.ClientServicing.Results
+
+@inject DialogService DialogService
+
+<RadzenDataGrid class="policy-grid-format" @ref="benefitExtendedMemberGrid" Data="@PolicyMemberExtendedBenefits" AllowFiltering="true" AllowColumnResize="true"
+    FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true"
+                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" TItem="BenefitExtendedMemberResult" ColumnWidth="300px"
+    LogicalFilterOperator="LogicalFilterOperator.Or" EditMode="DataGridEditMode.Single">
+    <Columns>
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="FullName" Filterable="false" Title="First Name & Surname" Width="70px" TextAlign="TextAlign.Right" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="Relation" Filterable="false" Title="Relation" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="RelationType" Filterable="false" Title="Relation Type" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="BenefitType" Filterable="false" Title="Benefit Type" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="CoverAmount" Filterable="false" Title="Cover Amount" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="PolicyPremium" Filterable="false" Title="Premium" Width="70px" TextAlign="TextAlign.Right" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="Status" Filterable="false" Title="Status" Width="70px" TextAlign="TextAlign.Left" FormatString="{0:yyyy/MM/dd}" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="DateOfCommencement" Filterable="false" Title="DOC" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="IDOrPassportNumber" Filterable="false" Title="ID Number/Passport Number" Width="70px" TextAlign="TextAlign.Left" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="WaitingPeriod" Filterable="false" Title="Waiting Period" Width="70px" TextAlign="TextAlign.Right" FormatString="{0:yyyy/MM/dd}" />
+        <RadzenDataGridColumn TItem="BenefitExtendedMemberResult" Property="DOB" Filterable="false" Title="DOB" Width="70px" TextAlign="TextAlign.Right" FormatString="{0:yyyy/MM/dd}" />
+    </Columns>
+</RadzenDataGrid>
+
+<div class="col-12">
+    <div class="offset-4"></div>
+    <div class="col-2">Total</div>
+    <div class="col-3">@Total</div>
+</div>
+
+@code {
+    [Parameter]
+    public List<BenefitExtendedMemberResult> PolicyMemberExtendedBenefits { get; set; }
+    public RadzenDataGrid<BenefitExtendedMemberResult> benefitExtendedMemberGrid = new RadzenDataGrid<BenefitExtendedMemberResult>();
+
+    public decimal Total { get; set; }
+
+    public ClientDetails clientDetails { get; set; }
+
+    public async Task OpenBenefit(int benefitId)
+    {
+        await DialogService.OpenAsync<BenefitDetailDialog>(
+            "Benefit Details",
+            new Dictionary<string, object>() { { "Benefit", benefitId } },
+            new DialogOptions() { Width = "700px", Height = "512px", Resizable = true, Draggable = true });
+    }
+}

@@ -1,0 +1,30 @@
+﻿<div class="info-board height-85">
+    <RadzenRow>
+        <RadzenColumn>
+
+        </RadzenColumn>
+        <RadzenColumn class="info-board-label">
+            <p>Information Board</p>
+        </RadzenColumn>
+        <RadzenColumn >
+            <RadzenRow class="info-board-errors">
+                errors
+            </RadzenRow>
+            <RadzenRow class="info-board-warnings">
+                warnings
+            </RadzenRow>
+        </RadzenColumn>
+    </RadzenRow>
+</div>
+@code {
+    [CascadingParameter]
+    public dynamic Errors { get; set; } = null;
+
+    [Parameter]
+    public EventCallback OnStateHasChanged { get; set; }
+
+    private async Task OnUpdatedChild()
+    {
+        await OnStateHasChanged.InvokeAsync();
+    }
+}
